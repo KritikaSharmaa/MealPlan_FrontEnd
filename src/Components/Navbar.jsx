@@ -1,13 +1,17 @@
 import { useState } from "react";
 import HMP_Logo from "../assets/HMP_Logo.png";
+import logo_mini from "../assets/logo_mini.png";
+import { MdMenu } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
     const [clickedMenu, setclickedMenu] = useState(false);
     const [clickAccount, setclickAccount] = useState(false);
     return <>
-        <div className="flex py-3 shadow-[0.3px_5px_7.2px_0.8px_rgb(77,77,77,0.05)]">
+        <div className="absolute top-0 left-0 w-full z-10 flex py-3 shadow-md bg-white">
             <div className="w-4/12 flex justify-start items-center m-730px:hidden text-GreyText" onClick={() => setclickedMenu(!clickedMenu)}>
-                <span className="md:hidden material-symbols-outlined ml-10">menu</span>
+                <MdMenu className="md:hidden ml-10 text-2xl" />
             </div>
             <div className="w-4/12 flex justify-center items-center">
                 <div className="w-8/12 h-6/12">
@@ -26,15 +30,37 @@ const Navbar = () => {
                     <li className="text-sm hover:text-black">CONTACT US</li>
                 </ul>
             </div>
-            <div className="w-4/12 flex justify-end mr-10 m-730px:hidden">
-                <span className="material-symbols-outlined !text-4xl text-GreyText" onClick={()=>setclickAccount(!clickAccount)}>account_circle</span>
+            <div className="w-4/12 flex justify-end items-center m-730px:hidden">
+                <FaUserCircle className="!text-2xl text-GreyText mr-10" onClick={() => setclickAccount(!clickAccount)} />
             </div>
         </div>
-        <div className={`h-full w-1/2 bg-green-300 absolute top-0 left-0 ${clickedMenu ? 'animate-slideOpenLeft' : 'animate-slideCloseLeft stopAnim'}`}>
-            <span className="material-symbols-outlined" onClick={()=>setclickedMenu(!clickedMenu)}>close</span>
-        </div>
-        <div className={`h-full w-1/2 bg-blue-300 absolute top-0 right-0 ${clickAccount ? 'animate-slideOpenRight' : 'animate-slideCloseRight stopAnim'}`}>
-        <span className="material-symbols-outlined" onClick={()=>setclickAccount(!clickAccount)}>close</span>
+        <div className={`h-full w-full z-10 bg-[#00000099] absolute top-0 left-0 overflow-hidden ${clickedMenu || clickAccount ? '' : 'animate-hideBackAnim stopAnim'} flex flex-col`}>
+            <div className={`h-full z-20 p-4 350px:w-full w-3/4 bg-white absolute top-0 left-0 ${clickedMenu ? 'animate-slideOpenLeft' : 'animate-slideCloseLeft stopAnim'}`}>
+                <div className="w-full h-[3rem] flex justify-end text-2xl">
+                    <RxCross2 onClick={() => setclickedMenu(!clickedMenu)} />
+                </div>
+                <div className="w-full h-1/6 flex justify-center py-2">
+                    <img src={logo_mini} alt="logo" className="h-full cover" />
+                </div>
+                <ul className="w-full h-4/6 py-10 text-GreyText font-semibold text-sm">
+                    <li className="py-3 border-b-2 border-[#0000001a]">HOME</li>
+                    <li className="py-3 border-b-2 border-[#0000001a]">FEATURES</li>
+                    <li className="py-3 border-b-2 border-[#0000001a]">MEAL PLANS</li>
+                    <li className="py-3 border-b-2 border-[#0000001a]">CONTACT US</li>
+                </ul>
+            </div>
+            <div className={`h-full z-20 p-4 350px:w-full w-3/4 bg-white absolute top-0 right-0 ${clickAccount ? 'animate-slideOpenRight' : 'animate-slideCloseRight stopAnim'} flex flex-col`}>
+                <div className="w-full h-[3rem] flex justify-end text-2xl">
+                    <RxCross2 onClick={() => setclickAccount(!clickAccount)} />
+                </div>
+                <div className="w-full h-1/6 flex justify-center py-2">
+                    <img src={logo_mini} alt="logo" className="h-full cover" />
+                </div>
+                <div className="w-full h-auto pt-6 grid grid-rows-2 gap-2">
+                    <div className="w-full border border-GreenBack text-white bg-GreenBack hover:bg-GreenDark py-1 text-center rounded-sm text-sm">SIGN IN</div>
+                    <div className="w-full border border-GreenBack text-GreenText hover:bg-GreenDark py-1 text-center rounded-sm text-sm">SIGN UP</div>
+                </div>
+            </div>
         </div>
     </>
 }

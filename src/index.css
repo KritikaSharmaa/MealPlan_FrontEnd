@@ -2,16 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     font-family: 'Lato', sans-serif;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
 }
 
-@layer utilities{
-    .stopAnim{
+@layer utilities {
+    .stopAnim {
         animation-fill-mode: forwards;
+    }
+
+    .landing-hero {
+        background-image: url(/src/assets/header_hero.jpg);
+    }
+
+    .landing-hero-sm {
+        background-image: url(/src/assets/header_hero_sm.png);
+    }
+    .centerIt{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
     }
 }
